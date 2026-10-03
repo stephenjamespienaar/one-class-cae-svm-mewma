@@ -1,0 +1,27 @@
+\section{Conclusion}
+
+\subsection{Summary}
+
+This study developed a hybrid scheme in which a MEWMA chart accumulates a CAE reconstruction error and an OC-SVM score of the CAE features. In the primary experiment, on a simulated nonlinear process with five independent
+datasets, every chart was calibrated empirically to an IC \ARL{} of 370. The learned components
+behaved largely as intended, and on independent IC data the hybrid chart was somewhat more liberal,
+and the classical benchmark somewhat more conservative, than the target. The hybrid chart had a lower $\ARL_1$ than both single-component ablations at every shift (within sampling error only against
+$S(0.05)$ at $\delta\le0.4$), so the combined vector carries more usable information than either
+learned signal alone, but it did not outperform the classical MEWMA: the two were
+indistinguishable at $\delta=0.2$, and the benchmark was faster at every larger shift, with the hybrid chart needing 1.4 to 2.5 times as many post-change observations. Larger smoothing constants
+shortened the hybrid chart's run-lengths modestly without closing the gap. In the external Extended TEP benchmark, with limits set by a false-alarm probability rather than an \ARL{}, both charts met their IC target and the classical MEWMA detected IDV(2) sooner at every severity, by 4.8 to 10.1 decisions on average.
+
+\subsection{Recommendations}
+
+First, for sustained mean shifts in a moderately nonlinear process and persistent step disturbances
+such as TEP IDV(2), a well-calibrated classical MEWMA on the raw variables should remain the default, and a learned hybrid scheme should be preferred only where it demonstrably improves detection of the relevant disturbance structure under a common IC criterion; because both studies are simulations, this implication has yet to be confirmed on measured plant data. Second,
+learned reconstruction and one-class information should be monitored jointly, since $H(0.05)$ had lower mean $\ARL_1$ than either ablation at every evaluated shift. Third, charts on overlapping windows should be
+calibrated empirically on the dependent process, with delays reported both in monitoring
+opportunities and in post-change observations.
+
+\subsection{Future work}
+
+The hybrid framework should be evaluated on faults that alter the shape, variability or dependence of the data
+(variance changes, sensor faults, drifts and transients), including the other TEP faults, for which distance-type features may be better suited, and on other processes. Direction-preserving learned features, dependence-aware finite-start scaling for
+overlapping windows, windowing that shortens the post-change ramp-in, and validation on measured
+plant data also deserve study.

@@ -1,0 +1,211 @@
+\section{Simulation and model details}
+\label{app:model}
+
+Table~\ref{tab:w2} gives the fixed mixing matrix of Equation~(\ref{eq:process}) (full row rank; the
+weights of each observed variable have unit norm) and Table~\ref{tab:cae} the layers of the convolutional autoencoder, both as implemented in the authoritative repository. The CAE was trained with Adam (learning rate $10^{-3}$, batch size 64, at most 100 epochs, early-stopping patience 10).
+
+\begin{table}[!ht]
+\centering
+\caption[The fixed mixing matrix]{The fixed $4\times8$ mixing matrix $\bm{W}_2$, shown transposed: row $k$
+holds the weights of $\tanh(z_{t,k})$ in the four observed variables $x_{t,1},\dots,x_{t,4}$.}
+\label{tab:w2}
+\begin{tabular}{crrrr}
+\toprule
+$k$ & $x_{t,1}$ & $x_{t,2}$ & $x_{t,3}$ & $x_{t,4}$ \\
+\midrule
+1 & $-0.60447198$ & $-0.04842081$ & $-0.05518327$ & $-0.04100004$ \\
+2 & $-0.06150649$ & $0.36085142$ & $0.45874929$ & $-0.84305316$ \\
+3 & $-0.37179578$ & $-0.83557846$ & $-0.21939336$ & $-0.40588165$ \\
+4 & $-0.01161746$ & $-0.11135410$ & $-0.17469105$ & $-0.11509976$ \\
+5 & $0.05885824$ & $-0.18152197$ & $-0.55464952$ & $0.26627250$ \\
+6 & $0.52361117$ & $0.30422580$ & $0.30578469$ & $0.07542546$ \\
+7 & $0.45120458$ & $0.15832824$ & $-0.13652085$ & $0.16952036$ \\
+8 & $-0.10604239$ & $0.07924137$ & $-0.53672635$ & $-0.06530930$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[!ht]
+\centering
+\caption[Layers of the convolutional autoencoder]{Layers of the convolutional autoencoder (kernel 3, stride 2 and padding 1 for every
+convolution; output padding 1 for the transposed convolutions).}
+\label{tab:cae}
+\begin{tabular}{llrr}
+\toprule
+Stage & Layer & Output shape & Parameters \\
+\midrule
+Input & standardised window $\bm{X}_t$ & $4\times32$ & -- \\
+Encoder & Conv1d $4\to8$, ReLU & $8\times16$ & 104 \\
+ & Conv1d $8\to16$, ReLU & $16\times8$ & 400 \\
+ & flatten, Linear $128\to8$ (bottleneck $\bm{h}_t$) & 8 & 1032 \\
+Decoder & Linear $8\to128$, ReLU; unflatten & $16\times8$ & 1152 \\
+ & ConvTranspose1d $16\to8$, ReLU & $8\times16$ & 392 \\
+ & ConvTranspose1d $8\to4$ (reconstruction $\hat{\bm{X}}_t$) & $4\times32$ & 100 \\
+\midrule
+Total & & & 3180 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\clearpage
+\section{Supplementary component diagnostics}
+\label{app:diagnostics}
+
+Figure~\ref{fig:recon} shows a typical IC window and its frozen-CAE reconstruction: the
+decoder reproduces the smooth level structure of each channel but not the high-frequency
+variation, which therefore dominates $\SPE_t$. Figure~\ref{fig:response} compares the IC distributions of the standardised components with their distributions under three shifts. It is a
+post-hoc descriptive diagnostic computed from the first 100 D5 trajectories at each shift with the
+frozen models; it was not a pre-specified output of the experiment.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=\linewidth]{diagnostic_reconstruction_example.pdf}
+\caption[Example window and CAE reconstruction]{One IC D3 window (trajectory 1, window
+1001) and its reconstruction by the frozen CAE ($\SPE_t=96.7$, against a D3 mean of 86).}
+\label{fig:recon}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=\linewidth]{diagnostic_component_response.pdf}
+\caption[Component distributions under IC and OOC conditions (post-hoc)]{Post-hoc descriptive
+diagnostic: distributions of $s_t$ and $\ell_t$, standardised by the D3 moments, IC (D3) and at $\delta=0.4$, 1.0 and 3.0 (first 100 D5 trajectories each). Mean shifts: $s_t$ 0.21, 0.75,
+1.86 and $\ell_t$ 0.10, 0.64, 2.55 standard deviations.}
+\label{fig:response}
+\end{figure}
+
+\clearpage
+\section{Supplementary Phase II results}
+\label{app:results}
+
+Figure~\ref{fig:d4} is the repository's own summary of the D4 validation in
+Table~\ref{tab:ic}. Tables~\ref{tab:d5}--\ref{tab:ablation} give the complete OOC results; every entry is computed from the committed per-trajectory run-lengths, and no D5 run-length was censored. Figure~\ref{fig:boxplots} shows run-length distributions of the primary pair
+at four shifts.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.7\linewidth]{results_d4_arl0_validation.pdf}
+\caption[Independent IC validation on D4]{D4 IC \ARL{} ($\pm1$ SE, 500 trajectories)
+of the six charts against the target of 370 (repository figure).}
+\label{fig:d4}
+\end{figure}
+
+\begin{table}[!ht]
+\centering
+\caption[OOC \ARL{} of all charts]{Restricted OOC \ARL{} (SE) of all six charts across the shift grid (D5, 500
+trajectories per shift).}
+\label{tab:d5}
+\small
+\begin{tabular}{rrrrrrr}
+\toprule
+$\delta$ & $H(0.05)$ & $H(0.10)$ & $H(0.20)$ & $S(0.05)$ & $R(0.05)$ & $M(0.05)$ \\
+\midrule
+\tabinput{tables/d5_arl1_full.tex}
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[!ht]
+\centering
+\caption[Primary paired comparison in detail]{Primary comparison in detail: paired mean difference
+$\bar d$ (SE), median run-lengths, share of $M(0.05)$ trajectories signalling at the first
+opportunity (no $H(0.05)$ trajectory did at any shift), mean delay in post-change observations
+($\ARL_1+31$) and the ratio of the two charts' delays in both units.}
+\label{tab:primary}
+\small
+\begin{tabular}{rrrrrrrrr}
+\toprule
+ & & \multicolumn{2}{c}{$\MRL$} & & \multicolumn{2}{c}{Obs.\ delay} & \multicolumn{2}{c}{Ratio $H/M$} \\
+\cmidrule(lr){3-4}\cmidrule(lr){6-7}\cmidrule(l){8-9}
+$\delta$ & $\bar d$ (SE) & $H$ & $M$ & $P(\RL_M=1)$ & $H$ & $M$ & obs. & opp. \\
+\midrule
+\tabinput{tables/primary_contrast.tex}
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[!ht]
+\centering
+\caption[Paired comparison with the ablations]{Paired mean run-length differences (SE) of $H(0.05)$ against its ablations; negative
+values mean that $H(0.05)$ signalled sooner.}
+\label{tab:ablation}
+\small
+\begin{tabular}{rrr}
+\toprule
+$\delta$ & $\RL_H-\RL_S$ & $\RL_H-\RL_R$ \\
+\midrule
+\tabinput{tables/ablation_contrast.tex}
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.8\linewidth]{results_primary_run_length_boxplots.pdf}
+\caption[Run-length distributions of the primary pair]{Run-length distributions of $H(0.05)$ and
+$M(0.05)$ at four shifts (log scale; repository figure).}
+\label{fig:boxplots}
+\end{figure}
+
+\clearpage
+\section{Reproducibility and provenance}
+\label{app:repro}
+
+The primary experiment is the committed state of \texttt{pipeline-thesis-independent}, the
+authoritative repository (branch \texttt{simplify-pipeline-code}, commit
+\texttt{e62bdee}). Data generation uses master seed 795 with independent PCG64DXSM streams per
+dataset, trajectory and shift; the CAE training seed is 3795; all numerical routes run in
+double precision (network in single precision) on one CPU thread. The frozen preprocessing
+statistics, CAE weights, OC-SVM state, D3 moments and control limits, and the per-trajectory
+D4/D5 run-lengths are committed artifacts, and the production run that produced them took 207 s.
+Every synthetic figure and generated table in this report is rebuilt, without refitting or recalibration,
+by \texttt{scripts/make\_all\_figures.py} in the report workspace, which reads these artifacts
+read-only; the source and derivation of each figure are recorded in
+\texttt{planning/final\_figure\_provenance.md}. The post-hoc diagnostic audit cited in
+Section~4.5 is a separate analysis of the same frozen experiment and is not part of its
+pre-specified design. The TEP application has its own provenance, given in Appendix~\ref{app:tep}.
+
+\section{Extended TEP protocol and provenance}
+\label{app:tep}
+
+The TEP application is a separate frozen study with its own protocol. It is the committed state of
+the repository \texttt{pipeline-thesis-tep} (branch \texttt{tep-application}, commit
+\texttt{0a121fa}), read in this workspace through \texttt{08\_tep\_application/source}. The data
+are the Mode~1 file \texttt{TEP\_Mode1.h5} of the published dataset \citep{reinartz_tennessee_2021},
+whose MD5 checksum (\texttt{c79ecc6d\ldots}) matches the official record. The protocol and the run
+registry were frozen before any model was fitted (SHA-256 \texttt{558ffcb6\ldots} and
+\texttt{0c03350d\ldots}).
+
+\textbf{Data and roles:} Rows before 30.00~h are IC, so each run has 599 nominal rows and
+568 pre-onset decisions, and each IDV(2) run has 2000 rows and 1969 decisions. TEP-D1 to TEP-D4 were
+drawn, with generator seed $(795,6)$, from the 13{,}445 non-IDV(2) runs whose seed occurs only once
+in the dataset: TEP-D1 has 40 training and 10 validation runs, TEP-D2 20 runs, and TEP-D3 and TEP-D4
+2000 runs each. The monitored variables are XMEAS(1)--XMEAS(22) and XMV(1)--XMV(4), XMV(6)--XMV(8),
+XMV(10) and XMV(11). XMV(5), XMV(9) and XMV(12) were constant on the TEP-D1 training rows and were
+removed, and the composition analysers XMEAS(23)--XMEAS(41) and the additional measurements were never
+used.
+
+\textbf{Phase I:} The CAE (seed 3795) reached its lowest validation loss, a mean squared
+reconstruction error of 0.677 in standardised units, at epoch 52. The OC-SVM, fitted to 11{,}360
+TEP-D2 windows, has $\gamma=0.0208$ and 361 support vectors. The raw covariance for $M$ had condition
+number $4.05\times10^8$, above the pre-registered guard of $10^8$, so $M$ was computed in the frozen
+standardised coordinates (condition number 280), which leaves $T_j^2$ unchanged; its 31-observation
+silent run-in is as in Section~3.3. Each limit is the 1900th smallest of the 2000 TEP-D3 per-run
+maxima of $T_j^2$ over the 568 nominal decisions: 325.46 for $H(0.05)$ and 423.59 for $M(0.05)$, each exceeded by exactly 100 maxima. Both charts start at $\bm{Z}_0=\hat{\bm{\mu}}$ at the first
+observation of every run and are never restarted. Phase~I ran in about 80~s on one processor thread.
+
+\textbf{Validation and evaluation:} On TEP-D4, 87 of the 2000 runs gave a false alarm for $H(0.05)$
+and 85 for $M(0.05)$. The false-alarm probability was 0.0375 for $H(0.05)$ and 0.0442 for $M(0.05)$
+in the 1200 runs from the dataset's 25--75\% seed-generation batch, and
+0.0525 and 0.0400 in the 800 runs from its separate 100\% batch; these values are descriptive only
+and changed nothing. Before onset in TEP-D5, $H(0.05)$ signalled in 4, 6, 4 and 4 runs and $M(0.05)$
+in 2, 4, 3 and 10 runs at the four severities. Between 91 and 196 runs were eligible per cell. The standard deviations of $D$ were 4.4, 2.2, 1.7 and
+1.7 decisions for $H(0.05)$ and 3.8, 2.1, 1.5 and 1.4 for $M(0.05)$, and the paired standard errors of
+$D_H-D_M$ were 0.42, 0.24, 0.19 and 0.12.
+
+\textbf{Presentation files:} Figure~\ref{fig:tep} is the frozen TEP figure redrawn by its own
+plotting code from the frozen summary, with only the in-plot title removed at the supervisor's
+request; its plotted values are unchanged. The rows of Table~\ref{tab:tep} are taken from the frozen primary table and summary
+(\texttt{d5\_primary\_table.csv} and \texttt{d5\_summary.json}). No result was recomputed, and no
+model was refitted, recalibrated or re-evaluated for this report. Source paths and SHA-256 values
+are recorded in \texttt{planning/final\_figure\_provenance.md}.

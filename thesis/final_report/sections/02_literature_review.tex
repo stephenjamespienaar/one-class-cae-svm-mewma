@@ -1,0 +1,27 @@
+\section{Literature Review}
+
+For monitoring multiple correlated characteristics, two principal monitoring approaches have been developed. The first extends univariate charts through Hotelling's $T^2$ statistic and, for the memory-type case, culminates in the MEWMA chart. Its limit is set to achieve a specified $\ARL_0$, and its \ARL{} depends on a mean shift only through the shift's Mahalanobis distance \citep{lowry_multivariate_1992}. The second, reviewed by \citet{macgregor_statistical_nodate},
+projects the observations onto a few latent variables and monitors two complementary statistics:
+$T^2$ on the retained scores and a squared prediction error (SPE) on the residual. Both approaches rely on linear structures and the assumptions of independence and normality of the observations.
+
+Representation learning offers a nonlinear counterpart to the projection step. Autoencoders learn
+low-dimensional codes that outperform principal components for dimension reduction \citep{hinton_reducing_2006}, and one-dimensional convolutional networks suit sensor signals when
+labelled data are scarce \citep{kiranyaz_1d_2021}. The analogy with latent-variable monitoring is
+direct: the autoencoder plays the role of the principal component model and its reconstruction
+error that of the SPE. For the latent space, feeding learned codes to an OC-SVM is established practice \citep{alaverdyan_regularized_2020,
+pinon_one-class_2023,mabu_disaster_2019}, and \citet{guzman_sidewalk_2026} report that combining
+autoencoder reconstruction error with an OC-SVM beats either component alone.
+
+Hybrid ML and SPC research has followed two strands. In the first, a learner operates on charting
+statistics while the chart remains classical: convolutional and recurrent networks recognise control chart patterns \citep{yu_control_2021}, deep networks and support vector regression (SVR) model
+EWMA-type statistics for censored reliability data \citep{lee_residual_2023,lee_monitoring_2024},
+and models trained on classical charting statistics widen the range of detectable shifts
+\citep{mukhtiar_enhanced_2025}. These learners need labelled OOC examples or a parametric
+model from which training data are simulated. In the second strand, representation learning enters
+the monitoring statistic itself: \citet{biegel_deep_2022} compute $T^2$ and SPE statistics from a
+deep autoencoder's latent representation and reconstruction error on a real sheet-metal forming
+process. That approach is unsupervised and acts on process observations, but its statistics are
+memoryless and it is assessed by classification metrics rather than run-lengths. Within the
+literature reviewed, no study combines a CAE reconstruction error with an OC-SVM score on the CAE
+representation in a memory-type chart whose limit is calibrated to a nominal $\ARL_0$ and compared
+with a classical MEWMA under the same target; this study addresses that gap.

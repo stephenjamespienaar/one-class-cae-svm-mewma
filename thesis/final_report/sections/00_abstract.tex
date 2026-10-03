@@ -1,0 +1,23 @@
+This study develops and evaluates a hybrid monitoring scheme for nonlinear, serially dependent multivariate processes that combines a
+one-dimensional convolutional autoencoder (CAE), a one-class support vector machine (OC-SVM) and
+a multivariate exponentially weighted moving average (MEWMA) control chart. For every window of
+32 observations, the CAE's reconstruction error and the OC-SVM's anomaly score on the CAE
+features form a two-dimensional monitoring vector that the MEWMA accumulates over time. The
+scheme is studied on a simulated nonlinear process driven by a latent vector autoregression,
+using five independent datasets for representation learning, detector fitting, empirical
+calibration of the control limit, independent in-control (IC) validation, and out-of-control (OOC)
+evaluation. The results reveal that the hybrid chart has a shorter OOC average run-length (\ARL{}) than both of its single-component ablations at
+every shift, but it does not outperform the classical MEWMA: the two are indistinguishable at the smallest
+shift, and the classical chart detects faster at every shift of 0.4 or more. Post-hoc
+diagnostics attribute this mainly to the weak response of distance-type learned features when the
+mean shifts in a fixed direction, amplified at large shifts by the startup behaviour of the charts. Simulated
+Extended Tennessee Eastman Process data were used to demonstrate the application of the proposed
+method. The frozen design was refitted to 31 process variables and both charts were
+calibrated to a 5\% probability of at least one false alarm over 568 nominal decisions instead of an IC \ARL{} of 370. The classical MEWMA again detected the feed-composition fault IDV(2) sooner at every severity, by 4.8 to
+10.1 monitoring decisions on average in onset-referenced conditional detection delay, while the
+hybrid chart's median delay was 17 to 39 decisions (0.80 to 1.90 hours after onset), depending on
+severity.
+
+\noindent\textbf{Keywords:} Statistical process control; MEWMA chart; Convolutional autoencoder;
+One-class support vector machine; Multivariate process monitoring; Anomaly detection;
+Tennessee Eastman Process.

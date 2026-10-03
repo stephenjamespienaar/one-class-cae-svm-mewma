@@ -1,0 +1,14 @@
+% Extended TEP IDV(2): rows for a six-column booktabs table.
+% Frozen source: pipeline-thesis-tep, branch tep-application, commit 0a121fa4adb4ef770c1d5821455103e31149d70a.
+% Sources: application/results/d5/d5_primary_table.csv and d5_summary.json.
+% Columns: severity, total runs, eligible H/M/paired, median D_H (hours),
+%          median D_M (hours), paired mean (D_H - D_M) with SE.
+% Eligibility: no pre-onset alarm in the relevant chart; paired eligibility
+% requires both charts to remain alarm-free before onset. No eligible delay censored.
+% Onset-referenced conditional detection delay, not ARL1.
+% Hours = 0.05*(D-1); positive paired H-M means H is slower.
+% Include using the existing tabinput command inside a tabular environment.
+25\% & 100 & 96/98/96 & 39 (1.90) & 29 (1.40) & +10.1 (0.4) \\
+50\% & 100 & 94/96/91 & 25 (1.20) & 18 (0.85) & +6.9 (0.2) \\
+75\% & 100 & 96/97/96 & 20 (0.95) & 14 (0.65) & +5.5 (0.2) \\
+100\% & 200 & 196/190/188 & 17 (0.80) & 12 (0.55) & +4.8 (0.1) \\

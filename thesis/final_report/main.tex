@@ -1,0 +1,184 @@
+% Final STK 795 research report.
+% Formatting follows 03_latex_template/legacy_formatting_source.tex (article 10pt, A4,
+% margins 3/2.5/2.5/2.5 cm, double spacing, natbib numbers + apalike). Packages that the
+% legacy file loaded but this report does not use (pstricks family, babel, rotating, ...)
+% are omitted; none of them affects the page layout.
+% Build from final_report/:  latexmk   (settings in latexmkrc; output in build/)
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper]{geometry}
+\geometry{verbose,tmargin=3cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm}
+\usepackage{url}
+\usepackage{amsmath,amssymb}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+\usepackage{setspace}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks]{hyperref}
+\doublespacing
+
+\graphicspath{{figures/}}
+% table rows (tables/*.tex) are read with the primitive \input so they expand
+% inside tabular environments.
+\makeatletter
+\newcommand{\tabinput}[1]{\@@input #1 }
+% Caption labels ("Figure 1:", "Table 1:") in bold (supervisor request): article.cls's own
+% \@makecaption with only the label emboldened, so caption spacing is unchanged.
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{\textbf{#1:} #2}%
+  \ifdim \wd\@tempboxa >\hsize
+    \textbf{#1:} #2\par
+  \else
+    \global \@minipagefalse
+    \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip}
+% Lists of figures and tables print "Figure n"/"Table n; the number
+% column is widened to fit the name.
+\renewcommand*{\l@figure}{\@dottedtocline{1}{1.5em}{4.6em}}
+\let\l@table\l@figure
+\let\thesis@listoffigures\listoffigures
+\let\thesis@listoftables\listoftables
+\renewcommand{\listoffigures}{\begingroup
+  \renewcommand{\numberline}[1]{\hb@xt@\@tempdima{\figurename~##1\hfil}}%
+  \thesis@listoffigures\endgroup}
+\renewcommand{\listoftables}{\begingroup
+  \renewcommand{\numberline}[1]{\hb@xt@\@tempdima{\tablename~##1\hfil}}%
+  \thesis@listoftables\endgroup}
+% apalike writes an empty widest label, which leaves natbib's numbered list without a
+% hanging indent; size the label column for two-digit numbers instead.
+\renewcommand\NAT@bibsetnum[1]{\settowidth\labelwidth{\@biblabel{99}}%
+  \setlength{\leftmargin}{\labelwidth}\addtolength{\leftmargin}{\labelsep}%
+  \setlength{\itemsep}{\bibsep}\setlength{\parsep}{\z@}}
+% Appendix contents entries read "Appendix A: ..." (switched on after \appendix).
+\newcommand{\appendixnumberline}[1]{\appendixname~#1:\ }
+\newcommand{\appendixtoc}{\let\numberline\appendixnumberline}
+\makeatother
+% Title-page date in the day-month-year form of the legacy template, fixed to the final
+% manuscript date so that rebuilding cannot change it.
+\newcommand{\reportdate}{2 October 2026}
+\newcommand{\T}{^{\mathsf T}}
+% Run-length metrics and control-limit abbreviations are italic; \mathit
+% sets each as one italic word rather than a product of variables.
+\newcommand{\ARL}{\ensuremath{\mathit{ARL}}}
+\newcommand{\RL}{\ensuremath{\mathit{RL}}}
+\newcommand{\MRL}{\ensuremath{\mathit{MRL}}}
+\newcommand{\SDRL}{\ensuremath{\mathit{SDRL}}}
+\newcommand{\UCL}{\ensuremath{\mathit{UCL}}}
+\newcommand{\LCL}{\ensuremath{\mathit{LCL}}}
+\newcommand{\SPE}{\mathrm{SPE}}
+
+\begin{document}
+
+\title{One-class hybrid SVM-CAE based MEWMA monitoring scheme}
+
+\author{Stephen Pienaar\vspace{0.5cm}\\
+STK 795 Research Report\vspace{2cm}\\
+Submitted in partial fulfillment of the degree BCom(Hons) Statistics and Data Science\vspace{0.5cm}\\
+Supervisor(s): Dr. MJC Malela, Co-supervisor(s): Dr. Lyson Chaka \vspace{2cm}\\
+Department of Statistics, University of Pretoria\vspace{0.5cm}\\
+\includegraphics[width=5cm]{UPlogohighres.jpg}\vspace{0.5cm}\\
+\reportdate}
+
+\date{}
+
+% Front matter is numbered in roman; the Introduction starts arabic page 1.
+\pagenumbering{roman}
+\maketitle
+\newpage{}
+\begin{abstract}
+\input{sections/00_abstract.tex}
+\end{abstract}
+
+\newpage{}
+
+\section*{Declaration}
+
+I, \emph{Stephen James Pienaar, }declare that this research report, submitted in
+partial fulfillment of the degree \emph{BCom(Hons) Statistics and Data Science, }at
+the University of Pretoria, is my own work and has not been previously
+submitted at this or any other tertiary institution.
+
+\subsection*{Artificial intelligence (AI) use disclosure}
+
+Artificial intelligence tools, including advanced language models such as ChatGPT and Claude/Claude
+Code, were used in the preparation of this report to support grammatical clarity, formatting and
+document structure, literature-search assistance, comprehension of the research topic, and code
+debugging. All research questions, methodological decisions, data analysis, interpretation of
+findings, and final conclusions were critically reviewed by the author and remain the author's own
+responsibility. No generative AI output was accepted without author review and verification.
+
+\vspace{1cm}
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+\emph{Stephen James Pienaar}
+
+\vspace{1cm}
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+\emph{Supervisor: Dr. MJC Malela}
+
+\vspace{1cm}
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+\emph{Co-supervisor: Dr. Lyson Chaka}
+
+\vspace{1cm}
+
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+Date 
+
+\newpage{}
+
+\section*{Acknowledgements}
+
+I would like to express my sincere gratitude to my supervisors for their invaluable guidance, support, and encouragement throughout the completion of this study. Their expertise and feedback have played an important role in shaping this research. I would also like to thank my family for their continuous support, patience, and encouragement throughout my studies. Their belief in me and constant motivation have been greatly appreciated.
+
+This research was approved by the Ethics Committee, Faculty of Natural and Agricultural Sciences of the University of Pretoria, Reference Number NAS116/2019.
+
+\newpage{}
+
+\tableofcontents{}
+
+\listoffigures
+
+\listoftables
+
+\newpage{}
+
+% ---------------- core report body (approximately 11 pages, at most 12) ----------------
+\pagenumbering{arabic}
+\input{sections/01_introduction.tex}
+\input{sections/02_literature_review.tex}
+\input{sections/03_methodology.tex}
+\input{sections/04_results.tex}
+\input{sections/05_application.tex}
+\input{sections/06_conclusion.tex}
+\label{body-end}
+% ---------------- end of core report body ----------------
+
+\newpage
+\phantomsection
+\addcontentsline{toc}{section}{References}
+\bibliographystyle{apalike}
+\bibliography{thesis-lib}
+
+\newpage
+\appendix
+% Appendix headings read "Appendix A: ..."; cross-references still print
+% the bare letter, as in "Appendix~\ref{app:model}". Only \section is used in the appendix.
+\makeatletter
+\renewcommand\@seccntformat[1]{\appendixname~\csname the#1\endcsname:\quad}
+\makeatother
+\addtocontents{toc}{\protect\appendixtoc}
+\input{appendix/appendix.tex}
+
+\end{document}

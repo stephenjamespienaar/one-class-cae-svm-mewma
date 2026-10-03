@@ -1,0 +1,79 @@
+{
+  "regeneration_bitwise_equal": {
+    "D3/rep0/deltaNone": true,
+    "D3/rep299/deltaNone": true,
+    "D4/rep0/deltaNone": true,
+    "D4/rep499/deltaNone": true,
+    "D5/rep0/delta0.2": true,
+    "D5/rep250/delta1.0": true,
+    "D5/rep499/delta3.0": true,
+    "D1": true,
+    "D2": true
+  },
+  "moments_bitwise_equal": {
+    "mu_y": true,
+    "sigma_y": true,
+    "mu_x": true,
+    "sigma_x": true
+  },
+  "limits_recalibrated": {
+    "H_0p05": {
+      "h_recomputed": 111.08301690320326,
+      "h_committed": 111.08301690320326,
+      "equal": true,
+      "arl0_recomputed": 371.04,
+      "arl0_committed": 371.04,
+      "censor_recomputed": 0,
+      "censor_committed": 0
+    },
+    "H_0p10": {
+      "h_recomputed": 83.58784283669753,
+      "h_committed": 83.58784283669753,
+      "equal": true,
+      "arl0_recomputed": 370.54,
+      "arl0_committed": 370.54,
+      "censor_recomputed": 0,
+      "censor_committed": 0
+    },
+    "H_0p20": {
+      "h_recomputed": 51.43064153149941,
+      "h_committed": 51.43064153149941,
+      "equal": true,
+      "arl0_recomputed": 372.43666666666667,
+      "arl0_committed": 372.43666666666667,
+      "censor_recomputed": 1,
+      "censor_committed": 1
+    },
+    "S_0p05": {
+      "h_recomputed": 66.045190051217,
+      "h_committed": 66.045190051217,
+      "equal": true,
+      "arl0_recomputed": 370.63,
+      "arl0_committed": 370.63,
+      "censor_recomputed": 0,
+      "censor_committed": 0
+    },
+    "R_0p05": {
+      "h_recomputed": 71.02839557889465,
+      "h_committed": 71.02839557889465,
+      "equal": true,
+      "arl0_recomputed": 371.34,
+      "arl0_committed": 371.34,
+      "censor_recomputed": 0,
+      "censor_committed": 0
+    },
+    "M_0p05": {
+      "h_recomputed": 46.5246825248281,
+      "h_committed": 46.5246825248281,
+      "equal": true,
+      "arl0_recomputed": 372.4266666666667,
+      "arl0_committed": 372.4266666666667,
+      "censor_recomputed": 0,
+      "censor_committed": 0
+    }
+  },
+  "cached_y_equals_monitoring_bank": true,
+  "run_length_cells_checked": 96,
+  "run_length_mismatches": [],
+  "seconds": 220.7133390903473
+}

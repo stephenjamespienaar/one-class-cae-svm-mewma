@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*:Zone.Identifier
+
+# LaTeX build output (the public PDF is thesis/main.pdf)
+thesis/final_report/build/
+thesis/final_report/main.pdf
+thesis/final_report/*.aux
+thesis/final_report/*.bbl
+thesis/final_report/*.blg
+thesis/final_report/*.fdb_latexmk
+thesis/final_report/*.fls
+thesis/final_report/*.lof
+thesis/final_report/*.log
+thesis/final_report/*.lot
+thesis/final_report/*.out
+thesis/final_report/*.synctex.gz
+thesis/final_report/*.toc
+
+# Regenerable caches and generated simulation banks
+simulation/data/
+simulation/results/cache/
+thesis/scripts/cache/
+
+# Extended TEP dataset (download separately; see tep-application/README.md)
+tep-application/application/data/
+tep-application/application/results/tmp/

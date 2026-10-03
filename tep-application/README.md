@@ -44,6 +44,9 @@ The download server throttled each connection to about 0.3 MB/s. The original co
 
 ## Verify without the dataset
 
+From the repository root, `python reproduce.py tep` runs this reconstruction and checks the
+results against `final_manifest.json`.
+
 ```bash
 cd tep-application
 python -m pytest application/tests     # 11 passed, 1 skipped (12 passed with the dataset in place)

@@ -17,6 +17,36 @@ simulated Extended Tennessee Eastman Process (TEP) data.
 - [`simulation/`](simulation/) — the simulation study: implementation, frozen models, results,
   tests and the Section 4.5 diagnostic evidence
 - [`tep-application/`](tep-application/) — the Extended TEP application
+- [`reproduce.py`](reproduce.py) — thin front end to the validated reproduction routes
+
+## Reproducing the results
+
+Install the pinned environment. Python 3.14.4 was used for all results, and everything runs on CPU.
+
+```bash
+python3.14 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+| Command | What it does | Time |
+|---|---|---|
+| `python reproduce.py verify` | Quick verification: both test suites, published-artifact hashes, the TEP frozen hash chain, the Section 4.5 evidence, and a thesis rebuild | ~10 s |
+| `python reproduce.py simulation` | Reproduces the simulation study from scratch and checks that all models and results are byte-identical | ~4 min |
+| `python reproduce.py tep` | Rebuilds the published TEP outputs (D5 summary, table, figure) from the committed per-run results | seconds |
+| `python reproduce.py thesis` | Compiles the thesis (28 pages, dated 2 October 2026), byte-identical to `thesis/main.pdf` | ~10 s |
+| `python reproduce.py all` | Reproduces all outputs available from the public repository, without the external TEP dataset | ~5 min |
+
+Each command prints a PASS/FAIL summary and exits non-zero on a genuine failure. The thesis steps
+need pdfLaTeX, BibTeX and latexmk. Without them, those steps report SKIPPED instead of failing.
+
+A **raw-data rerun of the TEP application is deliberately not wrapped**. It needs the external
+24 GB dataset. The frozen protocol was run once, and its Phase I manifest records the Git state,
+so a rerun cannot pass the published hash chain. See
+[`tep-application/README.md`](tep-application/README.md).
+
+The CPU-only PyTorch build (`torch 2.13.0+cpu`, used for the TEP results) can be installed from
+`https://download.pytorch.org/whl/cpu` before the other requirements. The standard
+`torch==2.13.0` wheel also reproduces the simulation bit-for-bit.
 
 ## Method overview
 
@@ -39,29 +69,11 @@ are indistinguishable at the smallest shift, and M(0.05) detects faster at every
 more. On the Extended TEP data (fault IDV(2)), the classical MEWMA again detected sooner at every
 severity, by 4.8 to 10.1 monitoring decisions on average.
 
-## Quick start
-
-Python 3.14.4 was used for all results.
-
-```bash
-python3.14 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-
-# Each study imports its own pipeline.py, so run the two test suites separately.
-python -m pytest simulation/tests                   # 21 tests
-python -m pytest tep-application/application/tests  # 12 tests (1 skipped without the TEP dataset)
-```
-
-Everything runs on CPU. The TEP results were produced with the CPU-only PyTorch build
-(`torch 2.13.0+cpu`). Installing `torch==2.13.0` from `https://download.pytorch.org/whl/cpu`
-before the other requirements gives that build. The standard `torch==2.13.0` wheel also
-reproduces the simulation bit-for-bit.
-
 ## Simulation study
 
 See [`simulation/README.md`](simulation/README.md). It covers the frozen pipeline, the
-from-scratch rerun (about 3.5 minutes), verification against the committed results, and the
-diagnostic evidence for Section 4.5.
+from-scratch rerun, verification against the committed results, and the diagnostic evidence for
+Section 4.5.
 
 ## TEP application
 
@@ -82,12 +94,13 @@ the PDF or regenerate its figures and tables.
   independent PCG64DXSM streams, and 3795 for CAE training. It runs PyTorch on one CPU thread
   with deterministic algorithms and limits native thread pools to one thread. Numerical work is
   in float64; only the network runs in float32.
-- **Checked during consolidation (2026-10-03):**
-  - the from-scratch simulation run reproduced every committed model and result file
+- **Checked for this release (2026-10-03):**
+  - the from-scratch simulation run reproduces every committed model and result file
     byte-for-byte;
   - the TEP frozen hash chain verifies, and the published TEP summary, table and figure rebuild
     byte-identically;
-  - the thesis rebuilds with identical content.
+  - the thesis figure scripts reproduce every figure and table byte-for-byte;
+  - the thesis PDF rebuilds byte-identically (`latexmkrc` fixes the build timestamp).
 - Identity is claimed relative to the pinned environment (`requirements.txt`), not across every
   platform.
 - **Two `pipeline.py` files, on purpose.** `simulation/pipeline.py` and
@@ -122,10 +135,16 @@ original workspace paths, `pipeline-thesis-independent` corresponds to `simulati
 
 - **Simulation data** is not stored. It is regenerated deterministically from the seed (761 MB;
   see `simulation/README.md`).
-- **The Extended TEP dataset** (`TEP_Mode1.h5`, 23.9 GB) is deliberately excluded from Git
-  because of its size. [`tep-application/README.md`](tep-application/README.md) gives its source
-  and checksums and where to place it.
+- **The Extended TEP dataset** (`TEP_Mode1.h5`, 23.9 GB) is not distributed by this repository
+  and is excluded from Git because of its size.
+  [`tep-application/README.md`](tep-application/README.md) gives its source and checksums and
+  where to place it.
 
 ## Licence
 
-No licence has been selected yet.
+- The project code is released under the [MIT License](LICENSE).
+- The thesis manuscript (`thesis/`) is the author's academic work. The software licence does not
+  automatically relicense it.
+- Third-party datasets and material keep their own terms. The Extended TEP dataset is not
+  distributed by this repository; its source and licence are listed in
+  [`tep-application/README.md`](tep-application/README.md).

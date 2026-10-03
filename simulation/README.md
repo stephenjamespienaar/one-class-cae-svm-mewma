@@ -41,6 +41,9 @@ python -m pytest tests          # 21 passed
 
 ## Verify the published results
 
+From the repository root, `python reproduce.py simulation` runs the from-scratch route below and
+checks the outputs against the published hashes.
+
 **Phase II from the committed models.** This takes about 3.5 minutes and writes 761 MB of
 ignored data under `data/generated/`. It rewrites `results/` byte-for-byte unchanged.
 

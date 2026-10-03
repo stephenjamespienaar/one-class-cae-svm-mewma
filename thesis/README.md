@@ -16,13 +16,13 @@ thesis, with the handwritten signature/initials and student number omitted from 
 Requires pdfLaTeX, BibTeX and latexmk. The original was built with TeX Live 2026 (pdfTeX 1.40.29).
 
 ```bash
-cd thesis/final_report
-latexmk                # aux files go to build/; the PDF is copied to final_report/main.pdf (ignored by Git)
+python reproduce.py thesis    # from the repository root; or: cd thesis/final_report && latexmk
 ```
 
-In this repository the title-page date is fixed to 2 October 2026 instead of the compile date.
-The rebuilt PDF therefore has the same content as `main.pdf`: text, fonts, images and every
-rendered page. Only the PDF's internal build timestamp and document ID differ.
+Auxiliary files go to `final_report/build/`, and the PDF is copied to `final_report/main.pdf`
+(ignored by Git). In this repository the title-page date is fixed to 2 October 2026, and
+`latexmkrc` fixes pdfTeX's build timestamp. With TeX Live 2026 the rebuilt PDF is therefore
+byte-identical to `main.pdf`.
 
 ## Regenerate figures and tables
 

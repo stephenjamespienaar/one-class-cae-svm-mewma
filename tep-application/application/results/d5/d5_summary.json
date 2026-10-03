@@ -1,0 +1,253 @@
+{
+  "definitions": {
+    "censoring": "no signal in j = 569..1969 -> D = 1401, censored",
+    "delay": "onset-referenced conditional detection delay D (not ARL1); D = 1 <=> signal at t = 30.00 h",
+    "hours": "Delta = 0.05 * (D - 1)",
+    "paired": "d = D_H - D_M on runs with no pre-onset alarm in H or M; positive = H slower",
+    "restricted_mean": "mean of min(D, 1401) over chart-specific eligible runs"
+  },
+  "pooled_pre_onset": {
+    "H": {
+      "clopper_pearson_95": [
+        0.021472856586093294,
+        0.05630017620179111
+      ],
+      "false_alarm_runs": 18,
+      "fap": 0.036,
+      "n": 500,
+      "se": 0.008331146379700696
+    },
+    "M": {
+      "clopper_pearson_95": [
+        0.02303077080624761,
+        0.05870729046322856
+      ],
+      "false_alarm_runs": 19,
+      "fap": 0.038,
+      "n": 500,
+      "se": 0.00855055553750749
+    }
+  },
+  "severities": {
+    "100": {
+      "H": {
+        "censor_count": 0,
+        "censor_fraction": 0.0,
+        "median_D": 17.0,
+        "median_hours": 0.8,
+        "median_note": null,
+        "n_eligible": 196,
+        "pre_onset": {
+          "clopper_pearson_95": [
+            0.005475565879556451,
+            0.05041360908989628
+          ],
+          "false_alarm_runs": 4,
+          "fap": 0.02,
+          "n": 200,
+          "se": 0.009899494936611665
+        },
+        "restricted_mean_D": 17.005102040816325,
+        "sd_D": 1.732043254566156,
+        "se_D": 0.123717375326154,
+        "truncation_limited": false
+      },
+      "M": {
+        "censor_count": 0,
+        "censor_fraction": 0.0,
+        "median_D": 12.0,
+        "median_hours": 0.55,
+        "median_note": null,
+        "n_eligible": 190,
+        "pre_onset": {
+          "clopper_pearson_95": [
+            0.02423416547210856,
+            0.09002753770135138
+          ],
+          "false_alarm_runs": 10,
+          "fap": 0.05,
+          "n": 200,
+          "se": 0.015411035007422441
+        },
+        "restricted_mean_D": 12.205263157894738,
+        "sd_D": 1.3934744685148246,
+        "se_D": 0.10109326320421765,
+        "truncation_limited": false
+      },
+      "n": 200,
+      "paired": {
+        "mean_difference_H_minus_M": 4.829787234042553,
+        "n_E_H": 196,
+        "n_E_HM": 188,
+        "n_E_M": 190,
+        "pairs_with_censoring": 0,
+        "se_paired": 0.1223830850644017
+      }
+    },
+    "25": {
+      "H": {
+        "censor_count": 0,
+        "censor_fraction": 0.0,
+        "median_D": 39.0,
+        "median_hours": 1.9000000000000001,
+        "median_note": null,
+        "n_eligible": 96,
+        "pre_onset": {
+          "clopper_pearson_95": [
+            0.011004493986188206,
+            0.09925715671265992
+          ],
+          "false_alarm_runs": 4,
+          "fap": 0.04,
+          "n": 100,
+          "se": 0.019595917942265423
+        },
+        "restricted_mean_D": 39.114583333333336,
+        "sd_D": 4.441123119370088,
+        "se_D": 0.4532702303055943,
+        "truncation_limited": false
+      },
+      "M": {
+        "censor_count": 0,
+        "censor_fraction": 0.0,
+        "median_D": 29.0,
+        "median_hours": 1.4000000000000001,
+        "median_note": null,
+        "n_eligible": 98,
+        "pre_onset": {
+          "clopper_pearson_95": [
+            0.002431336823942544,
+            0.07038393247107015
+          ],
+          "false_alarm_runs": 2,
+          "fap": 0.02,
+          "n": 100,
+          "se": 0.014
+        },
+        "restricted_mean_D": 28.93877551020408,
+        "sd_D": 3.809419488016872,
+        "se_D": 0.3848094789087023,
+        "truncation_limited": false
+      },
+      "n": 100,
+      "paired": {
+        "mean_difference_H_minus_M": 10.125,
+        "n_E_H": 96,
+        "n_E_HM": 96,
+        "n_E_M": 98,
+        "pairs_with_censoring": 0,
+        "se_paired": 0.4215286508753254
+      }
+    },
+    "50": {
+      "H": {
+        "censor_count": 0,
+        "censor_fraction": 0.0,
+        "median_D": 25.0,
+        "median_hours": 1.2000000000000002,
+        "median_note": null,
+        "n_eligible": 94,
+        "pre_onset": {
+          "clopper_pearson_95": [
+            0.02233488607131638,
+            0.12602993458082304
+          ],
+          "false_alarm_runs": 6,
+          "fap": 0.06,
+          "n": 100,
+          "se": 0.023748684174075833
+        },
+        "restricted_mean_D": 25.30851063829787,
+        "sd_D": 2.1851236806839123,
+        "se_D": 0.22537829899606024,
+        "truncation_limited": false
+      },
+      "M": {
+        "censor_count": 0,
+        "censor_fraction": 0.0,
+        "median_D": 18.0,
+        "median_hours": 0.8500000000000001,
+        "median_note": null,
+        "n_eligible": 96,
+        "pre_onset": {
+          "clopper_pearson_95": [
+            0.011004493986188206,
+            0.09925715671265992
+          ],
+          "false_alarm_runs": 4,
+          "fap": 0.04,
+          "n": 100,
+          "se": 0.019595917942265423
+        },
+        "restricted_mean_D": 18.427083333333332,
+        "sd_D": 2.1163264680332863,
+        "se_D": 0.21599666565950362,
+        "truncation_limited": false
+      },
+      "n": 100,
+      "paired": {
+        "mean_difference_H_minus_M": 6.923076923076923,
+        "n_E_H": 94,
+        "n_E_HM": 91,
+        "n_E_M": 96,
+        "pairs_with_censoring": 0,
+        "se_paired": 0.24018245467511853
+      }
+    },
+    "75": {
+      "H": {
+        "censor_count": 0,
+        "censor_fraction": 0.0,
+        "median_D": 20.0,
+        "median_hours": 0.9500000000000001,
+        "median_note": null,
+        "n_eligible": 96,
+        "pre_onset": {
+          "clopper_pearson_95": [
+            0.011004493986188206,
+            0.09925715671265992
+          ],
+          "false_alarm_runs": 4,
+          "fap": 0.04,
+          "n": 100,
+          "se": 0.019595917942265423
+        },
+        "restricted_mean_D": 19.8125,
+        "sd_D": 1.681556296692849,
+        "se_D": 0.17162312086090004,
+        "truncation_limited": false
+      },
+      "M": {
+        "censor_count": 0,
+        "censor_fraction": 0.0,
+        "median_D": 14.0,
+        "median_hours": 0.65,
+        "median_note": null,
+        "n_eligible": 97,
+        "pre_onset": {
+          "clopper_pearson_95": [
+            0.006229971538306397,
+            0.08517605297428
+          ],
+          "false_alarm_runs": 3,
+          "fap": 0.03,
+          "n": 100,
+          "se": 0.01705872210923198
+        },
+        "restricted_mean_D": 14.29896907216495,
+        "sd_D": 1.5422180215899561,
+        "se_D": 0.1565885154021319,
+        "truncation_limited": false
+      },
+      "n": 100,
+      "paired": {
+        "mean_difference_H_minus_M": 5.520833333333333,
+        "n_E_H": 96,
+        "n_E_HM": 96,
+        "n_E_M": 97,
+        "pairs_with_censoring": 0,
+        "se_paired": 0.1890530225138901
+      }
+    }
+  }
+}

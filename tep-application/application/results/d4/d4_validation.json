@@ -1,0 +1,85 @@
+{
+  "J0": 568,
+  "alpha_target": 0.05,
+  "d3_in_sample_fap": {
+    "H": 0.05,
+    "M": 0.05
+  },
+  "m_representation": "d1_standardised_fallback",
+  "n4": 2000,
+  "results": {
+    "H": {
+      "h_star": 325.46159653296104,
+      "overall": {
+        "clopper_pearson_95": [
+          0.03498586284676858,
+          0.053382598893372525
+        ],
+        "false_alarm_runs": 87,
+        "fap": 0.0435,
+        "n": 2000,
+        "se": 0.004561126505590478
+      },
+      "stratum_A_descriptive": {
+        "clopper_pearson_95": [
+          0.027481802907555194,
+          0.04985833151233394
+        ],
+        "false_alarm_runs": 45,
+        "fap": 0.0375,
+        "n": 1200,
+        "se": 0.005484352742120076
+      },
+      "stratum_B_descriptive": {
+        "clopper_pearson_95": [
+          0.03809584725903378,
+          0.07030525669997834
+        ],
+        "false_alarm_runs": 42,
+        "fap": 0.0525,
+        "n": 800,
+        "se": 0.007885409786434691
+      }
+    },
+    "M": {
+      "h_star": 423.59388643957266,
+      "overall": {
+        "clopper_pearson_95": [
+          0.034086074593150856,
+          0.05228591324237418
+        ],
+        "false_alarm_runs": 85,
+        "fap": 0.0425,
+        "n": 2000,
+        "se": 0.0045107510461119445
+      },
+      "stratum_A_descriptive": {
+        "clopper_pearson_95": [
+          0.033255984320490914,
+          0.057375673750012075
+        ],
+        "false_alarm_runs": 53,
+        "fap": 0.04416666666666667,
+        "n": 1200,
+        "se": 0.0059312710991702156
+      },
+      "stratum_B_descriptive": {
+        "clopper_pearson_95": [
+          0.02751804426691134,
+          0.05600119026617553
+        ],
+        "false_alarm_runs": 32,
+        "fap": 0.04,
+        "n": 800,
+        "se": 0.006928203230275509
+      }
+    }
+  },
+  "signal_rule": "false alarm iff max_j T2_ij > h_star (strict)",
+  "stage": "D4 one-shot in-control validation (no fitting, no calibration)",
+  "strata_n": {
+    "A": 1200,
+    "B": 800
+  },
+  "stratum_note": "stratum A/B values are descriptive only and trigger no action"
+}

@@ -1,0 +1,5 @@
+Severity,n,Pre-FAP H,Pre-FAP M,Eligible H,Eligible M,Median D H,Median D M,Restricted mean D H,Restricted mean D M,Paired n,Mean paired H-M (SE)
+25%,100,0.040,0.020,96,98,39,29,39.1,28.9,96,10.1 (0.4)
+50%,100,0.060,0.040,94,96,25,18,25.3,18.4,91,6.9 (0.2)
+75%,100,0.040,0.030,96,97,20,14,19.8,14.3,96,5.5 (0.2)
+100%,200,0.020,0.050,196,190,17,12,17.0,12.2,188,4.8 (0.1)

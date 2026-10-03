@@ -1,0 +1,45 @@
+{
+  "J0": 568,
+  "J1": 1401,
+  "code": {
+    "git": {
+      "head": "40d737e43c6020e0940546208cf74f85f291d613",
+      "status_short": [
+        "M application/tests/test_tep_pipeline.py",
+        "?? application/results/d5/",
+        "?? application/tep_d5.py"
+      ]
+    },
+    "tep_d5.py_sha256": "12874794afb36ae6a995d6dabc91a713e6d0eedaf204e7edec0e65ff344e5ec9"
+  },
+  "d4_manifest_sha256": "2c2e6377c1a79b028a4e00ff9c0ae7c1a01a5a9e3d7563aaeebcaa6a29b07316",
+  "decisions_per_run": 1969,
+  "frozen_limits": {
+    "H": 325.46159653296104,
+    "M": 423.59388643957266
+  },
+  "j_tau": 569,
+  "m_representation": "d1_standardised_fallback",
+  "phase1_manifest_sha256": "26a8f929c86d68032240471f48e2924d5762b04206a54eef0410b562d2dd34bc",
+  "protocol_sha256": "558ffcb6eeb7d0c99047f06032390a6ab6b706ee81254366f50630182586490f",
+  "registry_sha256": "0c03350d207f0127c179b87670a09e5b538fc4450def2ce4fe52547fb6f4e97c",
+  "rows_per_run": 2000,
+  "run_results_sha256": "597c5b614dcabb4b4e118baf97a0c8fe45c036a074eac0edce8447d5e1f4aa9f",
+  "runs_evaluated": {
+    "100": 200,
+    "25": 100,
+    "50": 100,
+    "75": 100
+  },
+  "stage": "D5 final evaluation (frozen artifacts; no fitting, no calibration)",
+  "versions": {
+    "h5py": "3.16.0",
+    "numpy": "2.4.6",
+    "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+    "python": "3.14.4",
+    "scikit-learn": "1.9.0",
+    "scipy": "1.18.1",
+    "threadpoolctl": "3.6.0",
+    "torch": "2.13.0+cpu"
+  }
+}

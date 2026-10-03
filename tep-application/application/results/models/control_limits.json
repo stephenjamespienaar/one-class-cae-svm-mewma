@@ -1,0 +1,34 @@
+[
+  {
+    "J0": 568,
+    "alpha": 0.05,
+    "chart_id": "H",
+    "d3_in_sample_fap": 0.05,
+    "dimension": 2,
+    "exceedances": 100,
+    "first_update_index": 1,
+    "h_star": 325.46159653296104,
+    "k_one_based": 1900,
+    "lambda": 0.05,
+    "n3": 2000,
+    "numpy_index": 1899,
+    "signal_rule": "T2 > h",
+    "source": "hybrid_monitoring_vector"
+  },
+  {
+    "J0": 568,
+    "alpha": 0.05,
+    "chart_id": "M",
+    "d3_in_sample_fap": 0.05,
+    "dimension": 31,
+    "exceedances": 100,
+    "first_update_index": 32,
+    "h_star": 423.59388643957266,
+    "k_one_based": 1900,
+    "lambda": 0.05,
+    "n3": 2000,
+    "numpy_index": 1899,
+    "signal_rule": "T2 > h",
+    "source": "selected_variables_d1_standardised_fallback"
+  }
+]

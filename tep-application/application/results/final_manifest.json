@@ -1,0 +1,33 @@
+{
+  "code": {
+    "git": {
+      "head": "40d737e43c6020e0940546208cf74f85f291d613",
+      "status_short": [
+        "M application/tests/test_tep_pipeline.py",
+        "?? application/D5_EVALUATION.md",
+        "?? application/results/d5/",
+        "?? application/results/figures/",
+        "?? application/results/final_manifest.json",
+        "?? application/tep_d5.py"
+      ]
+    },
+    "pipeline.py_sha256": "abd1b36c1bad1fccc7b689299172ab6bfa54c849651b08d69e268c45a6de5089",
+    "tep_d4.py_sha256": "90a7585487b96dd03528017e1a66e34346f0bf692fd80fd36f351c72a850a1b6",
+    "tep_d5.py_sha256": "29c9b4c68a0bb827c62486932950bb6a1f19c4b9652be50bdcd18a4363f510db",
+    "tep_pipeline.py_sha256": "5a6b8ffa5c020144ff79bc9e411f923a3e98d1a7e554d202aece78a1a536a4a6"
+  },
+  "hdf5_sha256": "d6b0ed0ef3974ff571afd6717ba0418a5b8eb58a7822c84a05735572d52b3294",
+  "sha256": {
+    "application/results/d4/d4_manifest.json": "2c2e6377c1a79b028a4e00ff9c0ae7c1a01a5a9e3d7563aaeebcaa6a29b07316",
+    "application/results/d5/d5_manifest.json": "152631a0b8817f08a05cb9863a4ffe21d2ec66e2136f7f37523bc1383dc436b8",
+    "application/results/d5/d5_primary_table.csv": "63086174c821e51cf24f8a1515d2e984010688b1266c51c35e32d3bed4161b92",
+    "application/results/d5/d5_run_results.csv": "597c5b614dcabb4b4e118baf97a0c8fe45c036a074eac0edce8447d5e1f4aa9f",
+    "application/results/d5/d5_summary.json": "9a5bb340c7be77ce5cd0f8162964f0a4eb404749f8a1b301d6b391e40a903456",
+    "application/results/figures/tep_d5_median_delay.pdf": "3d3634ae0fb8b401d01f89701c9628c1303def351fcce79ecce0e352c3209bb5",
+    "application/results/figures/tep_d5_median_delay.png": "5cf6000602c8eeb0d74e8eca89a181c8df3371aa7fdf7e78a0f2b0aab77a5c04",
+    "application/results/phase1_manifest.json": "26a8f929c86d68032240471f48e2924d5762b04206a54eef0410b562d2dd34bc",
+    "application/tep_protocol.json": "558ffcb6eeb7d0c99047f06032390a6ab6b706ee81254366f50630182586490f",
+    "application/tep_run_registry.csv": "0c03350d207f0127c179b87670a09e5b538fc4450def2ce4fe52547fb6f4e97c"
+  },
+  "stage": "Extended TEP external benchmark - final provenance"
+}
